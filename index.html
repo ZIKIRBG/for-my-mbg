@@ -3,236 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spesial Untuk Melia ❤️</title>
+    <title>Kado Spesial Untuk Melia</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Sacramento&display=swap" rel="stylesheet">
-    <!-- FontAwesome untuk ikon hati -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
     <style>
         * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
         }
 
         body {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
-            font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
+            background-color: #f7f4ef;
+            font-family: 'Plus Jakarta+Sans', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            position: relative;
+            min-height: 100vh;
+            color: #2c241d;
         }
 
-        /* Efek Hati Berjatuhan di Background */
-        .heart-bg {
-            position: absolute;
-            top: -10vh;
-            color: rgba(255, 255, 255, 0.6);
-            font-size: 1.5rem;
-            animation: fall linear infinite;
-            z-index: 1;
-        }
-
-        @keyframes fall {
-            0% {
-                transform: translateY(-10vh) translateX(0) rotate(0deg);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(110vh) translateX(50px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Kotak Kartu Utama */
-        .card {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            padding: 40px 30px;
-            border-radius: 25px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(255, 105, 135, 0.2);
-            max-width: 400px;
-            width: 90%;
-            z-index: 10;
-            position: relative;
-            animation: popUp 1s ease-in-out;
-        }
-
-        @keyframes popUp {
-            0% {
-                transform: scale(0.5);
-                opacity: 0;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .card h1 {
-            font-family: 'Sacramento', cursive;
-            font-size: 3.5rem;
-            color: #ff3366;
-            margin-bottom: 10px;
-        }
-
-        .card h2 {
-            font-size: 1.5rem;
-            color: #333;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .card p {
-            color: #666;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        /* Tombol Interaktif */
-        .btn-group {
+        .slide-container {
+            align-items: center;
+            background-color: #fffaf5;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(44, 36, 29, 0.08);
             display: flex;
+            flex-direction: column;
+            height: 720px;
             justify-content: center;
-            gap: 15px;
+            overflow: hidden;
+            padding: 60px;
             position: relative;
-            height: 50px;
+            width: 1280px;
+            border: 1px solid #e8e1d7;
         }
 
-        .btn {
-            padding: 12px 25px;
-            font-size: 1rem;
-            font-weight: 600;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
         }
 
-        #yesBtn {
-            background-color: #ff3366;
-            color: white;
-            z-index: 2;
+        .slide-title {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-align: center;
+            color: #3b2f2f;
         }
 
-        #yesBtn:hover {
-            background-color: #e60039;
-            transform: scale(1.05);
+        .subtitle {
+            font-size: 20px;
+            color: #705e54;
+            margin-bottom: 40px;
+            text-align: center;
         }
 
-        #noBtn {
-            background-color: #e0e0e0;
-            color: #555;
-            position: absolute;
-            right: 20px;
+        .content-area {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+            width: 100%;
         }
 
-        /* Pesan Tersembunyi setelah klik "Mau" */
-        .hidden-message {
-            display: none;
-            animation: fadeIn 0.8s ease-in-out forwards;
+        /* Layout Grid Cookies */
+        .cookies-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+            max-width: 900px;
         }
 
-        .hidden-message h2 {
-            color: #ff3366;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
+        .cookie-card {
+            background-color: #fdfbf7;
+            border-radius: 20px;
+            border: 1px solid #e6ded3;
+            padding: 35px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
         }
 
-        .hidden-message p {
-            color: #444;
-            font-size: 1rem;
+        .cookie-card:hover {
+            transform: translateY(-5px);
         }
 
-        .hidden-message i {
-            color: #ff3366;
-            font-size: 3rem;
-            margin-bottom: 15px;
-            animation: heartbeat 1.2s infinite;
+        /* Styling ikon/visual cookies */
+        .cookie-icon {
+            font-size: 70px;
+            margin-bottom: 20px;
         }
 
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+        .chocolate .cookie-icon {
+            color: #6b4423;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        .matcha .cookie-icon {
+            color: #557c55;
+        }
+
+        .cookie-card h3 {
+            font-size: 26px;
+            margin-bottom: 12px;
+            color: #3b2f2f;
+        }
+
+        .cookie-card p {
+            font-size: 16px;
+            color: #665c54;
+            line-height: 1.5;
+        }
+
+        /* Pesan Akhir Terima Kasih */
+        .thank-you-container {
+            text-align: center;
+            max-width: 700px;
+        }
+
+        .thank-you-container h2 {
+            font-size: 56px;
+            color: #3b2f2f;
+            margin-bottom: 20px;
+        }
+
+        .thank-you-container p {
+            font-size: 22px;
+            color: #615248;
+            line-height: 1.6;
+        }
+
+        .heart-accent {
+            color: #b85d46;
+            font-size: 30px;
+            margin-top: 20px;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
 
-    <!-- Background Efek Hati -->
-    <div id="heart-container"></div>
+    <!-- Slide 1: Menu Cookies Cokelat & Matcha -->
+    <div class="slide-container" id="slide1">
+        <h2 class="slide-title">Pilihan Cookies Spesial</h2>
+        <p class="subtitle">Dibuat khusus dengan dua varian rasa favorit</p>
+        
+        <div class="content-area">
+            <div class="cookies-grid">
+                <!-- Cookies Cokelat -->
+                <div class="cookie-card chocolate">
+                    <div class="cookie-icon">
+                        <i class="fa-solid fa-cookie-bite"></i>
+                    </div>
+                    <h3>Cookies Cokelat</h3>
+                    <p>Cookies klasik dengan lelehan cokelat premium di setiap gigitannya, manisnya pas dan berasa banget kelezatannya.</p>
+                </div>
 
-    <!-- Kartu Konten -->
-    <div class="card">
-        <!-- Tampilan Awal -->
-        <div id="main-content">
-            <h1>Happy Valentine</h1>
-            <h2>Untuk Melia Tersayang ❤️</h2>
-            <p>Hari Valentine ini rasanya kurang lengkap kalau gak nanya satu hal penting ke kamu... <br><br><b>Mau ya jadi pacar nasional aku? Hehehe ✨</b></p>
-            
-            <div class="btn-group">
-                <button class="btn" id="yesBtn" onclick="sayYes()">Mau Banget!</button>
-                <button class="btn" id="noBtn" onmouseover="moveButton()" onclick="moveButton()">Enggak</button>
+                <!-- Cookies Matcha -->
+                <div class="cookie-card matcha">
+                    <div class="cookie-icon">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+                    <h3>Cookies Matcha</h3>
+                    <p>Cookies dengan sentuhan teh hijau pilihan yang wangi, sedikit pahit khas matcha yang berpadu sempurna dengan manis.</p>
+                </div>
             </div>
-        </div>
-
-        <!-- Tampilan Setelah Klik "Mau Banget!" -->
-        <div class="hidden-message" id="hiddenMessage">
-            <i class="fa-solid fa-heart-circle-check"></i>
-            <h2>Yeay! Berhasil Disetujui! 🎉</h2>
-            <p>Makasih ya Melia udah jadi pacar nasional paling spesial buat aku. Semoga hari-hariku dan harimu selalu dipenuhi cinta dan hal-hal baik. Love you! 💖🌹</p>
         </div>
     </div>
 
-    <script>
-        // Fungsi Tombol "Enggak" Lari-lari saat didekati kursor
-        function moveButton() {
-            const noBtn = document.getElementById('noBtn');
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 100);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 100);
-            
-            noBtn.style.position = 'fixed';
-            noBtn.style.left = `${Math.abs(x)}px`;
-            noBtn.style.top = `${Math.abs(y)}px`;
-        }
+    <!-- Slide 2: Teks Terima Kasih Melia -->
+    <div class="slide-container" id="slide2" style="margin-top: 20px;">
+        <div class="content-area">
+            <div class="thank-you-container">
+                <h2>Terima Kasih, Melia</h2>
+                <p>Semoga cookies cokelat dan matcha ini bisa manis dan melengkapi harimu ya.</p>
+                <div class="heart-accent">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        // Fungsi saat tombol "Mau Banget!" diklik
-        function sayYes() {
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('hiddenMessage').style.display = 'block';
-            createConfettiHearts();
-        }
-
-        // Membuat efek hujan hati otomatis di background
-        function createBackgroundHearts() {
-            const container = document.getElementById('heart-container');
-            const heartCount = 20;
-
-            for (let i = 0; i < heartCount; i++) {
-                const heart = document.createElement('div');
-                heart.classList.add('heart-bg');
-                heart.innerHTML = '<i class="fa-solid fa-heart"></i>';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-                heart.style.animationDelay = (Math.random() * 5) + 's';
-                container.appendChild(heart);
-            }
-        }
-
-        // Jalankan fungsi buat background hati saat halaman dimuat
-        window.onload = createBackgroundHearts;
-    </script>
 </body>
 </html>
