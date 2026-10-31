@@ -1,192 +1,315 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kado Spesial Untuk Melia</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: #f7f4ef;
-            font-family: 'Plus Jakarta+Sans', sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            color: #2c241d;
-        }
-
-        .slide-container {
-            align-items: center;
-            background-color: #fffaf5;
-            border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(44, 36, 29, 0.08);
-            display: flex;
-            flex-direction: column;
-            height: 720px;
-            justify-content: center;
-            overflow: hidden;
-            padding: 60px;
-            position: relative;
-            width: 1280px;
-            border: 1px solid #e8e1d7;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Playfair Display', serif;
-        }
-
-        .slide-title {
-            font-size: 42px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            text-align: center;
-            color: #3b2f2f;
-        }
-
-        .subtitle {
-            font-size: 20px;
-            color: #705e54;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .content-area {
-            align-items: center;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-            justify-content: center;
-            width: 100%;
-        }
-
-        /* Layout Grid Cookies */
-        .cookies-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            width: 100%;
-            max-width: 900px;
-        }
-
-        .cookie-card {
-            background-color: #fdfbf7;
-            border-radius: 20px;
-            border: 1px solid #e6ded3;
-            padding: 35px;
-            text-align: center;
-            transition: transform 0.3s ease;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
-        }
-
-        .cookie-card:hover {
-            transform: translateY(-5px);
-        }
-
-        /* Styling ikon/visual cookies */
-        .cookie-icon {
-            font-size: 70px;
-            margin-bottom: 20px;
-        }
-
-        .chocolate .cookie-icon {
-            color: #6b4423;
-        }
-
-        .matcha .cookie-icon {
-            color: #557c55;
-        }
-
-        .cookie-card h3 {
-            font-size: 26px;
-            margin-bottom: 12px;
-            color: #3b2f2f;
-        }
-
-        .cookie-card p {
-            font-size: 16px;
-            color: #665c54;
-            line-height: 1.5;
-        }
-
-        /* Pesan Akhir Terima Kasih */
-        .thank-you-container {
-            text-align: center;
-            max-width: 700px;
-        }
-
-        .thank-you-container h2 {
-            font-size: 56px;
-            color: #3b2f2f;
-            margin-bottom: 20px;
-        }
-
-        .thank-you-container p {
-            font-size: 22px;
-            color: #615248;
-            line-height: 1.6;
-        }
-
-        .heart-accent {
-            color: #b85d46;
-            font-size: 30px;
-            margin-top: 20px;
-            display: inline-block;
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Celengan Saham — Pelacak Tabungan & Simulasi Aset</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0c1118;--panel:#141b26;--panel2:#1a2332;--line:#243044;--txt:#e6edf6;--mut:#8a98ad;--up:#2fd18b;--amb:#f5b942;--blue:#4aa3ff;--red:#ff6b7a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt);font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;font-variant-numeric:tabular-nums}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}
+.lbl{display:block;font-size:12px;color:var(--mut);margin:10px 0 4px}
+.inp{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:9px 11px;color:var(--txt);font:inherit;transition:border-color .2s ease-out,box-shadow .2s ease-out}
+.inp:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(74,163,255,.2)}
+.btn{border-radius:8px;padding:9px 14px;font-weight:600;font-size:14px;color:#06120d;background:var(--up);border:0;cursor:pointer;transition:transform .15s ease-out,filter .2s ease-out}
+.btn:hover{filter:brightness(1.1)}.btn:active{transform:scale(.97)}
+.btn.g{background:var(--panel2);color:var(--txt);border:1px solid var(--line)}
+.btn.r{background:#3a1c24;color:#ff9aa5;border:1px solid #5a2a35}
+.btn.sm{padding:5px 9px;font-size:12px}
+.bar{height:12px;background:var(--panel2);border-radius:99px;overflow:hidden}
+.bar>div{height:100%;width:0;background:linear-gradient(90deg,#1fa36b,var(--up));border-radius:99px;transition:width 1s ease-out}
+#cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+#cal.fade{animation:fadeIn .35s ease-out}
+.dh{text-align:center;font-size:12px;color:var(--mut);padding-bottom:2px}
+.day{position:relative;aspect-ratio:1;border-radius:10px;background:var(--panel2);border:1px solid transparent;color:var(--txt);font:inherit;cursor:pointer;transition:transform .15s ease-out,background .25s ease-in,border-color .2s ease-out}
+.day:hover{transform:translateY(-2px);border-color:var(--blue)}
+.day.off{background:repeating-linear-gradient(45deg,#101722,#101722 6px,#151e2d 6px,#151e2d 12px);color:#5d6b80}
+.day.hol{color:var(--red);border-color:#4a2530}
+.day.chk{background:#12775a;color:#fff;border-color:var(--up)}
+.day.cir{border-radius:50%;box-shadow:inset 0 0 0 3px var(--amb)}
+.day.today{outline:2px solid var(--blue);outline-offset:1px}
+.ck{position:absolute;top:2px;right:6px;font-size:11px;font-style:normal;color:#b9ffe0}
+.dot{position:absolute;bottom:5px;left:50%;width:6px;height:6px;margin-left:-3px;border-radius:50%;background:var(--blue)}
+#ov{position:fixed;inset:0;background:rgba(5,8,12,.7);display:flex;align-items:center;justify-content:center;padding:16px;opacity:0;pointer-events:none;transition:opacity .25s ease-out;z-index:50}
+#ov.show{opacity:1;pointer-events:auto}
+#md{width:100%;max-width:400px;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;transform:translateY(28px);transition:transform .3s ease-out}
+#ov.show #md{transform:none}
+#toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,30px);background:var(--panel2);border:1px solid var(--line);padding:9px 16px;border-radius:99px;opacity:0;transition:all .3s ease-out;z-index:60;font-size:14px}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+tr.row{animation:slideUp .35s ease-out}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.up{color:var(--up)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
 <body>
+<div class="max-w-6xl mx-auto p-4 md:p-6">
+  <header class="flex flex-wrap items-center justify-between gap-3 mb-5">
+    <div>
+      <h1 class="text-2xl font-bold">Celengan Saham</h1>
+      <p class="text-sm" style="color:var(--mut)">Nabung tiap hari, suntik dana kapan saja, lihat saldo tumbuh seperti portofolio.</p>
+    </div>
+    <div class="flex gap-2">
+      <button class="btn g" onclick="exportData()">Ekspor JSON</button>
+      <button class="btn g" onclick="$('imp').click()">Impor JSON</button>
+      <input id="imp" type="file" accept=".json,application/json" class="hidden" onchange="importData(this)">
+    </div>
+  </header>
 
-    <!-- Slide 1: Menu Cookies Cokelat & Matcha -->
-    <div class="slide-container" id="slide1">
-        <h2 class="slide-title">Pilihan Cookies Spesial</h2>
-        <p class="subtitle">Dibuat khusus dengan dua varian rasa favorit</p>
-        
-        <div class="content-area">
-            <div class="cookies-grid">
-                <!-- Cookies Cokelat -->
-                <div class="cookie-card chocolate">
-                    <div class="cookie-icon">
-                        <i class="fa-solid fa-cookie-bite"></i>
-                    </div>
-                    <h3>Cookies Cokelat</h3>
-                    <p>Cookies klasik dengan lelehan cokelat premium di setiap gigitannya, manisnya pas dan berasa banget kelezatannya.</p>
-                </div>
+  <section class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5" id="stats"></section>
 
-                <!-- Cookies Matcha -->
-                <div class="cookie-card matcha">
-                    <div class="cookie-icon">
-                        <i class="fa-solid fa-leaf"></i>
-                    </div>
-                    <h3>Cookies Matcha</h3>
-                    <p>Cookies dengan sentuhan teh hijau pilihan yang wangi, sedikit pahit khas matcha yang berpadu sempurna dengan manis.</p>
-                </div>
-            </div>
+  <div class="grid lg:grid-cols-3 gap-5">
+    <div class="space-y-5">
+      <section class="panel">
+        <h2 class="font-semibold mb-1">Target tabungan</h2>
+        <label class="lbl" for="gName">Nama target</label>
+        <input id="gName" class="inp" onchange="saveGoal()">
+        <label class="lbl" for="gTarget">Nominal target (Rp)</label>
+        <input id="gTarget" type="number" min="1" class="inp" onchange="saveGoal()">
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="lbl" for="gDaily">Tabungan harian (Rp)</label><input id="gDaily" type="number" min="1" class="inp" onchange="saveGoal()"></div>
+          <div><label class="lbl" for="gStart">Tanggal mulai</label><input id="gStart" type="date" class="inp" onchange="saveGoal()"></div>
         </div>
+        <div class="mt-5">
+          <div class="flex justify-between text-sm mb-1"><span id="pTxt"></span><span id="pPct" class="up font-semibold"></span></div>
+          <div class="bar"><div id="pBar"></div></div>
+        </div>
+        <div id="est" class="mt-4 space-y-2 text-sm"></div>
+      </section>
+
+      <section class="panel">
+        <h2 class="font-semibold">Suntikan dana</h2>
+        <p class="text-xs mb-1" style="color:var(--mut)">Setoran besar atau rezeki tambahan. Grafik langsung naik dan estimasi hari terpotong.</p>
+        <label class="lbl" for="iAmt">Nominal (Rp)</label>
+        <input id="iAmt" type="number" min="1" class="inp" placeholder="1000000">
+        <div class="grid grid-cols-2 gap-3">
+          <div><label class="lbl" for="iDate">Tanggal</label><input id="iDate" type="date" class="inp"></div>
+          <div><label class="lbl" for="iNote">Catatan</label><input id="iNote" class="inp" placeholder="Bonus, THR..."></div>
+        </div>
+        <button class="btn mt-4 w-full" onclick="addInject()">Suntik dana</button>
+      </section>
     </div>
 
-    <!-- Slide 2: Teks Terima Kasih Melia -->
-    <div class="slide-container" id="slide2" style="margin-top: 20px;">
-        <div class="content-area">
-            <div class="thank-you-container">
-                <h2>Terima Kasih, Melia</h2>
-                <p>Semoga cookies cokelat dan matcha ini bisa manis dan melengkapi harimu ya.</p>
-                <div class="heart-accent">
-                    <i class="fa-solid fa-heart"></i>
-                </div>
-            </div>
+    <div class="lg:col-span-2 space-y-5">
+      <section class="panel">
+        <div class="flex flex-wrap items-center gap-2 mb-3">
+          <button class="btn g sm" onclick="nav(-12)" aria-label="Tahun sebelumnya">«</button>
+          <button class="btn g sm" onclick="nav(-1)" aria-label="Bulan sebelumnya">‹</button>
+          <select id="mSel" class="inp" style="width:auto" onchange="V.m=+this.value;renderCal()"></select>
+          <input id="ySel" type="number" min="1900" max="2999" class="inp" style="width:90px" onchange="V.y=+this.value||V.y;renderCal()" aria-label="Tahun">
+          <button class="btn g sm" onclick="nav(1)" aria-label="Bulan berikutnya">›</button>
+          <button class="btn g sm" onclick="nav(12)" aria-label="Tahun berikutnya">»</button>
+          <button class="btn g sm ml-auto" onclick="goToday()">Hari ini</button>
         </div>
-    </div>
+        <div id="dh" class="grid grid-cols-7 gap-1.5 mb-1"></div>
+        <div id="cal"></div>
+        <div class="flex flex-wrap gap-4 mt-4 text-xs" style="color:var(--mut)">
+          <span><b class="up">✓</b> Menabung</span>
+          <span><b style="color:var(--amb)">◯</b> Pengingat</span>
+          <span><b style="color:var(--red)">▨</b> Libur</span>
+          <span><b style="color:var(--blue)">●</b> Suntikan dana</span>
+          <span>Akhir pekan otomatis dihitung libur</span>
+        </div>
+      </section>
 
+      <section class="panel">
+        <h2 class="font-semibold mb-2">Pertumbuhan saldo</h2>
+        <div style="height:260px"><canvas id="chart"></canvas></div>
+      </section>
+    </div>
+  </div>
+
+  <section class="panel mt-5">
+    <h2 class="font-semibold mb-3">Riwayat transaksi</h2>
+    <div class="overflow-x-auto">
+      <table class="w-full text-sm">
+        <thead><tr class="text-left" style="color:var(--mut)"><th class="py-2 pr-3 font-normal">Tanggal</th><th class="pr-3 font-normal">Catatan</th><th class="pr-3 font-normal">Jenis</th><th class="pr-3 text-right font-normal">Nominal</th><th></th></tr></thead>
+        <tbody id="log"></tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<div id="ov" onclick="if(event.target===this)closeM()"><div id="md" role="dialog" aria-modal="true"></div></div>
+<div id="toast"></div>
+
+<script>
+const KEY='celengan_saham_v1',MON=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+const $=id=>document.getElementById(id);
+const p2=n=>String(n).padStart(2,'0');
+const ymd=d=>d.getFullYear()+'-'+p2(d.getMonth()+1)+'-'+p2(d.getDate());
+const pd=s=>{const[a,b,c]=s.split('-').map(Number);return new Date(a,b-1,c)};
+const rp=n=>new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n||0);
+const fmtD=s=>pd(s).toLocaleDateString('id-ID',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+const fmtS=s=>pd(s).toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'});
+const esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+
+function def(){return{goal:{name:'Beli GPU Baru',target:10000000,daily:50000,start:ymd(new Date())},marks:{},tx:[]}}
+function load(){try{const o=JSON.parse(localStorage.getItem(KEY));return o&&o.goal&&o.tx?o:def()}catch(e){return def()}}
+let S=load(),V={y:new Date().getFullYear(),m:new Date().getMonth()},chart=null;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+
+const checkTx=s=>S.tx.find(t=>t.type==='harian'&&t.date===s);
+const total=()=>S.tx.reduce((a,t)=>a+(+t.amount||0),0);
+const isOff=s=>{const w=pd(s).getDay();return w===0||w===6||S.marks[s]==='holiday'};
+
+function toast(t){const e=$('toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2200)}
+function openM(h){$('md').innerHTML=h;$('ov').classList.add('show')}
+function closeM(){$('ov').classList.remove('show')}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
+
+/* ---------- Statistik ---------- */
+function streak(){let d=new Date(),n=0;if(!checkTx(ymd(d)))d.setDate(d.getDate()-1);
+  for(let i=0;i<5000;i++){const s=ymd(d);if(checkTx(s))n++;else if(!isOff(s))break;d.setDate(d.getDate()-1)}return n}
+function avgWeek(){const dates=S.tx.map(t=>t.date).concat(S.goal.start);const first=pd(dates.sort()[0]);
+  const weeks=Math.max(1,(new Date()-first)/6048e5);return total()/weeks}
+function animNum(el,to){const from=+el.dataset.v||0,t0=performance.now();el.dataset.v=to;
+  (function f(t){const k=Math.min(1,(t-t0)/700),e=1-Math.pow(1-k,3);el.textContent=rp(from+(to-from)*e);if(k<1)requestAnimationFrame(f)})(t0)}
+function renderStats(){
+  const T=total(),rem=Math.max(0,S.goal.target-T);
+  const items=[['Total terkumpul',T,'up',1],['Sisa target',rem,'',1],['Streak menabung',streak()+' hari','',0],['Rata-rata / minggu',avgWeek(),'',1]];
+  if(!$('stats').children.length)$('stats').innerHTML=items.map((x,i)=>`<div class="panel"><div class="text-xs" style="color:var(--mut)">${x[0]}</div><div id="st${i}" class="text-xl font-bold mt-1 ${x[2]}"></div></div>`).join('');
+  items.forEach((x,i)=>{const el=$('st'+i);x[3]?animNum(el,x[1]):el.textContent=x[1]});
+}
+
+/* ---------- Target & estimasi ---------- */
+function renderGoal(){
+  const g=S.goal,T=total(),rem=Math.max(0,g.target-T),pct=g.target>0?Math.min(100,T/g.target*100):0;
+  $('pTxt').textContent=rp(T)+' dari '+rp(g.target);
+  $('pPct').textContent=pct.toFixed(1)+'%';
+  requestAnimationFrame(()=>$('pBar').style.width=pct+'%');
+  if(rem<=0){$('est').innerHTML='<div class="up font-semibold">Target tercapai. Kerja bagus!</div>';return}
+  if(!(g.daily>0)){$('est').innerHTML='<div style="color:var(--mut)">Isi tabungan harian untuk melihat estimasi.</div>';return}
+  const n=Math.ceil(rem/g.daily),today=new Date();today.setHours(0,0,0,0);
+  let base=pd(g.start>ymd(today)?g.start:ymd(today));
+  if(ymd(base)===ymd(today)&&checkTx(ymd(today)))base.setDate(base.getDate()+1);
+  const raw=new Date(base);raw.setDate(raw.getDate()+n-1);
+  let d=new Date(base),c=0,cal=0,over=false;
+  while(c<n){if(!isOff(ymd(d)))c++;if(c<n){d.setDate(d.getDate()+1);cal++}if(cal>36500){over=true;break}}
+  $('est').innerHTML=`
+   <div class="rounded-lg p-3" style="background:var(--panel2)"><div class="text-xs" style="color:var(--mut)">Estimasi mentah (tanpa memperhitungkan libur)</div>
+     <div class="font-semibold">${n} hari · selesai ${fmtS(ymd(raw))}</div></div>
+   <div class="rounded-lg p-3" style="background:var(--panel2)"><div class="text-xs" style="color:var(--mut)">Estimasi hari efektif (tanpa Sabtu, Minggu, dan libur)</div>
+     <div class="font-semibold">${over?'Lebih dari 100 tahun':n+' hari kerja · selesai '+fmtS(ymd(d))+' ('+(cal+1)+' hari kalender)'}</div></div>`;
+}
+function saveGoal(){
+  const g=S.goal;g.name=$('gName').value.trim()||'Target tabungan';g.target=Math.max(1,+$('gTarget').value||1);
+  g.daily=Math.max(1,+$('gDaily').value||1);g.start=$('gStart').value||g.start;render();
+}
+function fillGoal(){const g=S.goal;$('gName').value=g.name;$('gTarget').value=g.target;$('gDaily').value=g.daily;$('gStart').value=g.start;$('iDate').value=ymd(new Date())}
+
+/* ---------- Suntikan dana ---------- */
+function addInject(){
+  const a=+$('iAmt').value,d=$('iDate').value;
+  if(!(a>0)||!d){toast('Isi nominal dan tanggal dulu');return}
+  S.tx.push({id:uid(),date:d,amount:a,note:$('iNote').value.trim()||'Suntikan dana',type:'suntikan'});
+  $('iAmt').value='';$('iNote').value='';render();toast('Dana ditambahkan: '+rp(a));
+}
+
+/* ---------- Kalender ---------- */
+function nav(k){const d=new Date(V.y,V.m+k,1);V.y=d.getFullYear();V.m=d.getMonth();renderCal()}
+function goToday(){const n=new Date();V={y:n.getFullYear(),m:n.getMonth()};renderCal()}
+function renderCal(){
+  const{y,m}=V,first=(new Date(y,m,1).getDay()+6)%7,dim=new Date(y,m+1,0).getDate(),today=ymd(new Date());
+  let h='';for(let i=0;i<first;i++)h+='<div></div>';
+  for(let d=1;d<=dim;d++){
+    const s=y+'-'+p2(m+1)+'-'+p2(d),mk=S.marks[s],c=!!checkTx(s),inj=S.tx.some(t=>t.date===s&&t.type==='suntikan'),wk=[0,6].includes(pd(s).getDay());
+    let cl='day';if(wk||mk==='holiday')cl+=' off';if(mk==='holiday')cl+=' hol';if(c)cl+=' chk';if(mk==='circle')cl+=' cir';if(s===today)cl+=' today';
+    h+=`<button class="${cl}" onclick="dayModal('${s}')" aria-label="${fmtD(s)}">${d}${c?'<i class="ck">✓</i>':''}${inj?'<b class="dot"></b>':''}</button>`;
+  }
+  const cal=$('cal');cal.innerHTML=h;cal.classList.remove('fade');void cal.offsetWidth;cal.classList.add('fade');
+  $('mSel').innerHTML=MON.map((n,i)=>`<option value="${i}" ${i===m?'selected':''}>${n}</option>`).join('');
+  $('ySel').value=y;
+}
+function dayModal(s){
+  const c=checkTx(s),mk=S.marks[s],st=[];
+  if(c)st.push('Menabung '+rp(c.amount));if(mk==='circle')st.push('Pengingat');if(mk==='holiday')st.push('Libur');
+  if(!mk&&[0,6].includes(pd(s).getDay()))st.push('Akhir pekan');
+  openM(`<h3 class="text-lg font-semibold">${fmtD(s)}</h3>
+   <p class="text-sm mb-4" style="color:var(--mut)">${st.join(' · ')||'Belum ada tanda'}</p>
+   <div class="grid gap-2">
+    <button class="btn ${c?'g':''}" onclick="act('${s}','check')">${c?'Batalkan centang':'✓ Tandai menabung ('+rp(S.goal.daily)+')'}</button>
+    <button class="btn g" onclick="act('${s}','circle')">${mk==='circle'?'Lepas bunderan':'◯ Bunderin tanggal'}</button>
+    <button class="btn g" onclick="act('${s}','holiday')">${mk==='holiday'?'Jadikan hari biasa':'▨ Setel hari libur'}</button>
+    <button class="btn r" onclick="act('${s}','clear')">Hapus tanda</button>
+    <button class="btn g" onclick="closeM()">Tutup</button>
+   </div>`);
+}
+function act(s,a){
+  const c=checkTx(s);
+  if(a==='check'){c?S.tx=S.tx.filter(t=>t!==c):S.tx.push({id:uid(),date:s,amount:S.goal.daily,note:'Tabungan harian',type:'harian'})}
+  else if(a==='circle'||a==='holiday'){S.marks[s]===a?delete S.marks[s]:S.marks[s]=a}
+  else{delete S.marks[s];if(c)S.tx=S.tx.filter(t=>t!==c)}
+  closeM();render();
+}
+
+/* ---------- Riwayat ---------- */
+function renderLog(){
+  const rows=[...S.tx].sort((a,b)=>b.date.localeCompare(a.date));
+  $('log').innerHTML=rows.length?rows.map(t=>`<tr class="row" style="border-top:1px solid var(--line)">
+    <td class="py-2 pr-3 whitespace-nowrap">${fmtS(t.date)}</td><td class="pr-3">${esc(t.note)}</td>
+    <td class="pr-3"><span class="text-xs px-2 py-0.5 rounded-full" style="background:${t.type==='harian'?'#12392f;color:#6ee7b7':'#17324f;color:#8ec5ff'}">${t.type==='harian'?'Harian':'Suntikan'}</span></td>
+    <td class="pr-3 text-right font-semibold up">+${rp(t.amount)}</td>
+    <td class="text-right whitespace-nowrap"><button class="btn g sm" onclick="editTx('${t.id}')">Edit</button> <button class="btn r sm" onclick="delTx('${t.id}')">Hapus</button></td></tr>`).join('')
+    :'<tr><td colspan="5" class="py-6 text-center" style="color:var(--mut)">Belum ada transaksi. Klik tanggal di kalender atau suntik dana untuk memulai.</td></tr>';
+}
+function editTx(id){
+  const t=S.tx.find(x=>x.id===id);if(!t)return;
+  openM(`<h3 class="text-lg font-semibold mb-1">Edit transaksi</h3>
+   <label class="lbl" for="e1">Tanggal</label><input id="e1" type="date" class="inp" value="${t.date}">
+   <label class="lbl" for="e2">Nominal (Rp)</label><input id="e2" type="number" min="1" class="inp" value="${t.amount}">
+   <label class="lbl" for="e3">Catatan</label><input id="e3" class="inp" value="${esc(t.note)}">
+   <div class="flex gap-2 mt-5"><button class="btn flex-1" onclick="saveTx('${id}')">Simpan perubahan</button><button class="btn g" onclick="closeM()">Batal</button></div>`);
+}
+function saveTx(id){
+  const t=S.tx.find(x=>x.id===id),d=$('e1').value,a=+$('e2').value;
+  if(!d||!(a>0)){toast('Tanggal dan nominal wajib diisi');return}
+  if(t.type==='harian'&&d!==t.date&&checkTx(d)){toast('Tanggal itu sudah dicentang');return}
+  t.date=d;t.amount=a;t.note=$('e3').value.trim()||t.note;closeM();render();toast('Transaksi diperbarui');
+}
+function delTx(id){if(confirm('Hapus transaksi ini?')){S.tx=S.tx.filter(x=>x.id!==id);render()}}
+
+/* ---------- Grafik ---------- */
+function renderChart(){
+  if(typeof Chart==='undefined')return;
+  const by={};S.tx.forEach(t=>by[t.date]=(by[t.date]||0)+(+t.amount||0));
+  const dates=Object.keys(by).sort();let labels=[S.goal.start],vals=[0],run=0;
+  dates.forEach(d=>{run+=by[d];if(d===labels[0]&&vals.length===1){vals[0]=run}else{labels.push(d);vals.push(run)}});
+  const L=labels.map(fmtS),tgt=labels.map(()=>S.goal.target);
+  if(!chart){
+    chart=new Chart($('chart'),{type:'line',data:{labels:L,datasets:[
+      {label:'Saldo',data:vals,borderColor:'#2fd18b',backgroundColor:'rgba(47,209,139,.15)',fill:true,tension:.25,pointRadius:3,borderWidth:2.5},
+      {label:'Target',data:tgt,borderColor:'#f5b942',borderDash:[6,6],pointRadius:0,borderWidth:1.5}]},
+      options:{maintainAspectRatio:false,animation:{duration:900,easing:'easeOutQuart'},interaction:{mode:'index',intersect:false},
+        plugins:{legend:{labels:{color:'#8a98ad'}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+rp(c.parsed.y)}}},
+        scales:{x:{ticks:{color:'#8a98ad',maxTicksLimit:7},grid:{display:false}},
+                y:{beginAtZero:true,ticks:{color:'#8a98ad',callback:v=>v>=1e6?(v/1e6)+' jt':v>=1e3?(v/1e3)+' rb':v},grid:{color:'#243044'}}}}});
+  }else{chart.data.labels=L;chart.data.datasets[0].data=vals;chart.data.datasets[1].data=tgt;chart.update()}
+}
+
+/* ---------- Ekspor / Impor ---------- */
+function exportData(){
+  const b=new Blob([JSON.stringify(S,null,2)],{type:'application/json'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download='celengan-saham-'+ymd(new Date())+'.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);toast('Backup diunduh');
+}
+function importData(inp){
+  const f=inp.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{try{const o=JSON.parse(r.result);
+    if(!o.goal||!Array.isArray(o.tx)||typeof o.marks!=='object')throw 0;
+    if(!confirm('Impor akan menimpa data saat ini. Lanjutkan?'))return;
+    S={goal:o.goal,marks:o.marks||{},tx:o.tx};fillGoal();render();toast('Data berhasil diimpor')}
+    catch(e){toast('File tidak valid')}inp.value=''};
+  r.readAsText(f);
+}
+
+function render(){renderStats();renderGoal();renderCal();renderLog();renderChart();save()}
+$('dh').innerHTML=['Sen','Sel','Rab','Kam','Jum','Sab','Min'].map(d=>`<div class="dh">${d}</div>`).join('');
+fillGoal();render();
+</script>
 </body>
 </html>
